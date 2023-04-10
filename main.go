@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-tuts/helper"
 	"strings"
 )
 
@@ -21,7 +22,7 @@ func main() {
 		}
 
 		firstName, lastName, email, numberOfTickets := getUserInput()
-		isValidName, isValidEmail, isValidNumberOfTickets := validateUserInput(firstName, lastName, email, numberOfTickets)
+		isValidName, isValidEmail, isValidNumberOfTickets := helper.ValidateUserInput(firstName, lastName, email, numberOfTickets, remainigTickets)
 
 		if isValidName && isValidEmail && isValidNumberOfTickets {
 			bookTicket(firstName, lastName, email, numberOfTickets)
@@ -60,14 +61,6 @@ func getFirstNames() []string {
 	return firstNames
 }
 
-func validateUserInput(firstName string, lastName string, email string, numberOfTickets uint) (bool, bool, bool) {
-	isValidName := len(firstName) >= 2 && len(lastName) >= 2
-	isValidEmail := strings.Contains(email, "@") && strings.Contains(email, ".")
-	isValidNumberOfTickets := numberOfTickets > 0 && numberOfTickets <= remainigTickets
-
-	return isValidName, isValidEmail, isValidNumberOfTickets
-}
-
 func getUserInput() (string, string, string, uint) {
 	var firstName string
 	var lastName string
@@ -98,3 +91,11 @@ func bookTicket(firstName string, lastName string, email string, numberOfTickets
 	fmt.Println("We have", remainigTickets, "remainig tickets")
 
 }
+
+// A few more things to learn
+// 1. Maps in golang
+// 2. Structs in golang
+// 3. Coroutines and concurrency in golang
+// 4. Interfaces in golang
+// 5. How to write tests in golang
+// 6. How to write benchmarks in golang
