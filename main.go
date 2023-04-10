@@ -23,6 +23,7 @@ func main() {
 		var firstName string
 		var lastName string
 		var email string
+		// var city string
 		var numberOfTickets uint
 
 		fmt.Println("Please enter your first name")
@@ -34,10 +35,18 @@ func main() {
 		fmt.Println("Please enter your email")
 		fmt.Scan(&email)
 
+		// fmt.Println("Please enter your city")
+		// fmt.Scan(&city)
+
 		fmt.Println("Please enter the number of tickets you want to book")
 		fmt.Scan(&numberOfTickets)
 
-		if numberOfTickets <= remainigTickets {
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@") && strings.Contains(email, ".")
+		isValidNumberOfTickets := numberOfTickets > 0 && numberOfTickets <= remainigTickets
+		// isValidCity := city == "Lagos" || city == "Abuja"
+
+		if isValidEmail && isValidName && isValidNumberOfTickets {
 			remainigTickets = remainigTickets - numberOfTickets
 
 			bookings = append(bookings, firstName+" "+lastName)
@@ -55,7 +64,26 @@ func main() {
 			fmt.Printf("See other people who have booked tickets: %v\n", firstNames)
 
 		} else {
-			fmt.Println("Sorry we only have", remainigTickets, "remainig tickets")
+			if !isValidName {
+				fmt.Println("Name must be at least 2 characters")
+			}
+			if !isValidEmail {
+				fmt.Println("Email must be valid")
+			}
+			if !isValidNumberOfTickets {
+				fmt.Println("Sorry we only have", remainigTickets, "remainig tickets")
+			}
+		}
+
+		city := "Lagos"
+
+		switch city {
+		case "Lagos":
+			fmt.Println("You are in Lagos")
+		case "Abuja":
+			fmt.Println("You are in Abuja")
+		default:
+			fmt.Println("You are not in Lagos or Abuja")
 		}
 	}
 
